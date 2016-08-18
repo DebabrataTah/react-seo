@@ -7,7 +7,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import selectHome from './selectors';
+import { selectHomeHead , selectHomeBody } from './selectors';
 import styles from './styles.css';
 import { createStructuredSelector } from 'reselect';
 import { fetchPage } from './actions'
@@ -21,11 +21,11 @@ export class Home extends React.Component { // eslint-disable-line react/prefer-
     return (
       <div className={styles.home} dir="rtl">
       <Helmet
-        title="tomp"
+        title={this.props.head.title}
         meta={[
-          { name: 'description', content: this.props.description },
-          { name: 'keywords', content: this.props.keywords },
-          { name: 'robots', content: this.props.robots }
+          { name: 'description', content: this.props.head.description },
+          { name: 'keywords', content: this.props.head.keywords },
+          { name: 'robots', content: this.props.head.robots }
         ]}
       />
         <h1>{this.props.body.h1}</h1>
@@ -43,12 +43,13 @@ export class Home extends React.Component { // eslint-disable-line react/prefer-
 }
 
 const mapStateToProps = createStructuredSelector({
-  body : selectHome()
+  body : selectHomeBody(),
+  head : selectHomeHead()
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    dispatch
   };
 }
 

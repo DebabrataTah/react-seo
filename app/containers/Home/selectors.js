@@ -6,20 +6,19 @@ import { createSelector } from 'reselect';
 const selectHomeDomain = () => state => state.get('browser');
 
 /**
- * Other specific selectors
- */
-
-
-/**
  * Default selector used by Home
  */
-
-const selectHome = () => createSelector(
+const selectHomeBody = () => createSelector(
   selectHomeDomain(),
   (substate) => substate.get('body').toJS()
 );
 
-export default selectHome;
+const selectHomeHead = () => createSelector(
+  selectHomeDomain(),
+  (substate) => substate.get('head').toJS()
+);
+
 export {
-  selectHomeDomain,
+  selectHomeBody,
+  selectHomeHead
 };
