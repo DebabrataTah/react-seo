@@ -14,7 +14,8 @@ import { fetchPage } from './actions'
 
 export class Home extends React.Component { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
-    this.props.dispatch(fetchPage());
+    const throttle = this.props.location.query.seconds || 1;
+    this.props.dispatch(fetchPage(throttle));
   }
   
   render() {

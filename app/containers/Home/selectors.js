@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 /**
  * Direct selector to the home state domain
  */
-const selectHomeDomain = () => state => state.get('browser');
+const selectHomeDomain = () => state => state.get('home');
 
 /**
  * Default selector used by Home

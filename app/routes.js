@@ -19,7 +19,7 @@ export default function createRoutes(store) {
   return [
     {
       path: '/',
-      name: 'browser',
+      name: 'home',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
           System.import('containers/Home/reducer'),
@@ -30,14 +30,36 @@ export default function createRoutes(store) {
         const renderRoute = loadModule(cb);
 
         importModules.then(([reducer, sagas, component]) => {
-          injectReducer('browser', reducer.default);
+          injectReducer('home', reducer.default);
           injectSagas(sagas.default);
           renderRoute(component);
         });
 
         importModules.catch(errorLoading);
       },
-    }, {
+    },
+    {
+      path: '/render-delay',
+      name: 'render-delay',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          System.import('containers/Home/reducer'),
+          System.import('containers/Home/sagas'),
+          System.import('containers/Home')
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('home', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    },
+    {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {

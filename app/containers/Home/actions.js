@@ -8,8 +8,9 @@ import {
   FETCH_PAGE,
 } from './constants';
 
-export function fetchPage() {
+export function fetchPage(throttleSec) {
   return {
-    type: FETCH_PAGE
+    type: FETCH_PAGE,
+    throttleSec
   };
 }
